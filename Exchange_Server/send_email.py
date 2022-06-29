@@ -1,3 +1,9 @@
+"""
+This python script creates a new folder in a location and sends the complete path of the folder via email using an exchange server. The name of the created folder is the date itself. This script is used by me on a daily schedule to send the location of the folder that contains various reports for the Finance department. The reports are loaded into this folder every day via a different cron job.
+"""
+
+
+
 import os
 from datetime import date
 ###
@@ -16,9 +22,9 @@ def connect(server, email, username, password):
                 return Account(primary_smtp_address=email, autodiscover=False, config = config, access_type=DELEGATE)
 
 a1='mail.sanimabank.com'
-a2='rpauser@sanimabank.com'
-a3='rpauser@sanimabank.com'
-a4='0pt!plex1'
+a2=os.environ.get('python_user')
+a3=os.environ.get('python_user') #using env variables to retreive username and passwords
+a4=os.environ.get('python_pass')
 a=connect(a1,a2,a3,a4)
 print(str(a))
 signature='Regards,\nSanima Bank,\nRobotic Process Automation,\nIT Department.'
